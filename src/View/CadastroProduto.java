@@ -208,8 +208,20 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
 
             
-            if (this.textPreco.getText().length() <= 2) {
-                throw new Mensagens("Formato invalido. Tente colocar '.' em vez de ','");
+            try {
+                preço = Double.parseDouble(this.textPreco.getText());
+                if (preço < 0) {
+                    throw new Mensagens("Preço inválido");
+                }
+
+            } catch (Exception erro) {
+                throw new Mensagens("Preço inválido. Tente colocar '.' em vez de ','");
+            } 
+            
+            
+            
+            if (this.textPreco.getText().length() < 1) {
+                throw new Mensagens("Formato inválido.");
             } else {
                 preço = Double.parseDouble(this.textPreco.getText());
             } 

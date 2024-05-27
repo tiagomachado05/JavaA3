@@ -228,14 +228,28 @@ public class GerenciaProduto extends javax.swing.JFrame {
             } else {
                 quantidade_estoque = Integer.parseInt(this.textEstoque.getText());
             }
+            
+            
+            try {
+                preço = Double.parseDouble(this.textPreco.getText());
+                if (preço < 0) {
+                    throw new Mensagens("Preço inválido");
+                }
 
-            if (this.textPreco.getText().length() <= 2) {
-               //  textPreco = preço.replace(",";".");
-                throw new Mensagens("Formato invalido. Tente colocar '.' em vez de ','");
+            } catch (Exception erro) {
+                throw new Mensagens("Preço inválido. Tente colocar '.' em vez de ','");
+            } 
+            
+            
+            
+            if (this.textPreco.getText().length() < 1) {
+                throw new Mensagens("Formato inválido.");
             } else {
                 preço = Double.parseDouble(this.textPreco.getText());
-            }
-
+            } 
+            
+            
+            
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 String dateString = this.textData.getText();
@@ -247,7 +261,7 @@ public class GerenciaProduto extends javax.swing.JFrame {
             }
             int id;
             if (this.tableProdutos.getSelectedRow() == -1) {
-                throw new Mensagens("Primeiro Selecione um Aluno para Alterar");
+                throw new Mensagens("primeiro selecione um Produto para alterar");
             } else {
                 id = Integer.parseInt(this.tableProdutos.getValueAt(this.tableProdutos.getSelectedRow(), 0).toString());
             }
